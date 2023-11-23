@@ -32,7 +32,7 @@ const App = () => {
       .then(setErrorMessage({message: `${newName} number has been updated to ${newNumber}`, type: 'success'}))
       .then(setTimeout(() => {setErrorMessage({message: null, type: null})}, 5000))
       .catch(error => {
-        setErrorMessage({message: `${newName} could not be updated to number ${newNumber}`, type: 'error'})
+        setErrorMessage({message: error.response.data.error, type: 'error'})
         setTimeout(() => {setErrorMessage({message: null, type: null})}, 5000)
       })
       
@@ -47,7 +47,8 @@ const App = () => {
     }
 
     personService.create(personObject).then(response => setPersons([...persons, response])).catch(error => {
-      setErrorMessage({message: `${newName} could not be added to the phonebook`, type: 'error'})
+      console.log(error.response.data.error)
+      setErrorMessage({message: error.response.data.error, type: 'error'})
       setTimeout(() => {setErrorMessage({message: null, type: null})}, 5000)
       return
     })
