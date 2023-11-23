@@ -47,7 +47,6 @@ const App = () => {
     }
 
     personService.create(personObject).then(response => setPersons([...persons, response])).catch(error => {
-      console.log(error.response.data.error)
       setErrorMessage({message: error.response.data.error, type: 'error'})
       setTimeout(() => {setErrorMessage({message: null, type: null})}, 5000)
       return
